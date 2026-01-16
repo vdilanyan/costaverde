@@ -1,0 +1,92 @@
+/*
+ THEME NAME: Costa Verde
+ AUTHOR: _dilanyan
+ VERSION: 1.0
+ */
+
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  color: #4f4f4f;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  position: relative;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+
+  @media (min-width: 1300px) {
+    width: 1270px;
+  }
+
+  @media (min-width: 1480px) {
+    width: 1440px;
+  }
+}
+
+.flex-container {
+  display: flex;
+}
+
+.grid-container {
+  display: grid;
+}
+
+.transition {
+  transition: 0.25s;
+}
+
+.relative-parent {
+  position: relative;
+  z-index: 1000;
+}
+
+.absolute {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+button {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.font-bold {
+  font-weight: 600;
+}
