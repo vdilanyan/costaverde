@@ -1,0 +1,46 @@
+#hero {
+  padding-top: 32px;
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    max-width: 805px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  p {
+    font-size: 21px;
+  }
+
+  a.btn {
+    margin-top: 16px;
+  }
+
+  .images-wrapper {
+    padding-top: 74px;
+
+    @media (max-width: 1327px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .images {
+      gap: 16px;
+      justify-content: center;
+
+      img {
+        width: 416px;
+        height: 416px;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+}

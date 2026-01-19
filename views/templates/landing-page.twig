@@ -1,0 +1,14 @@
+{% extends 'base.twig' %}
+{% block content %}
+    {% include 'components/hero.twig' with {
+        'heading': hero.heading,
+        'description': hero.description,
+        'button_label': hero.button_label,
+        'images': hero.images,
+    } %}
+    {% include 'components/why-us.twig' with {
+        'heading': why_us.heading,
+        'description': why_us.description,
+        'cards': why_us.cards,
+    } %}
+{% endblock %}

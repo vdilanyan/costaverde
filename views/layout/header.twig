@@ -1,3 +1,11 @@
-<header itemscope itemtype="https://schema.org/WPHeader" class="container flex-container">
-    header
+<header itemscope itemtype="https://schema.org/WPHeader">
+    <div class="container flex-container">
+        <div itemscope itemtype="https://schema.org/Organization" id="logo">
+            <img src="{{ theme.link }}/assets/img/logo.png" alt="Costa Verde Logo">
+        </div>
+        <a href="tel:+1{{ phone_number }}" class="btn phone-call">
+            <img src="{{ theme.link }}/assets/img/PhoneCall.svg" alt="Phone Logo">
+            {{ formatted_phone_number }}
+        </a>
+    </div>
 </header>

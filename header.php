@@ -17,6 +17,12 @@
         use Timber\Timber;
 
         $context = Timber::get_context();
+        $phone_number = get_field('phone_number', 'option');
+
+        $formatted = preg_replace('/(\d{3})(\d{3})(\d{4})/', '$1-$2-$3', $phone_number);
+
+        $context['phone_number'] = get_field('phone_number', 'option');
+        $context['formatted_phone_number'] = $formatted;
 
         Timber::render('layout/header.twig', $context); ?>
 
