@@ -10,33 +10,33 @@ ready(function () {
 
 });
 
-(function(){
-    const track = document.querySelector('.carousel .reviews');
+(function () {
+    const track = document.querySelector('#testimonials .carousel .reviews');
+    if (!track) return;
+
     const items = Array.from(track.children);
-    const prevBtn = document.querySelector('.carousel-prev');
-    const nextBtn = document.querySelector('.carousel-next');
+    const prevBtn = document.querySelector('#testimonials .carousel-prev');
+    const nextBtn = document.querySelector('#testimonials .carousel-next');
+    if (!prevBtn || !nextBtn || items.length === 0) return;
 
     let slidesToShow = window.innerWidth >= 900 ? 2 : 1;
-    let currentIndex = 0; // page index (not item index)
+    let currentIndex = 0; // page index
 
     function pagesCount() {
         return Math.ceil(items.length / slidesToShow);
     }
 
-    function setWidths() {
-        // adjust min-width for items (done in CSS for common cases)
-        // JS will position via transform
-        updateTrack();
-    }
+    function updateTrack(animate = true) {
+        const pageStartItemIndex = currentIndex * slidesToShow;
+        const pageStartItem = items[pageStartItemIndex];
+        if (!pageStartItem) return;
 
-    function updateTrack(animate=true) {
-        const pageWidth = track.getBoundingClientRect().width;
-        const offset = pageWidth * currentIndex;
-        if (!animate) track.style.transition = 'none';
-        else track.style.transition = '';
+        const offset = pageStartItem.offsetLeft - items[0].offsetLeft;
+
+        track.style.transition = animate ? '' : 'none';
         track.style.transform = `translateX(${-offset}px)`;
+
         if (!animate) {
-            // force reflow then restore transition
             void track.offsetWidth;
             track.style.transition = '';
         }
@@ -52,30 +52,29 @@ ready(function () {
         const pages = pagesCount();
         goTo((currentIndex + 1) % pages);
     }
+
     function prev() {
         const pages = pagesCount();
         goTo((currentIndex - 1 + pages) % pages);
     }
 
-    prevBtn.addEventListener('click', ()=> { prev(); });
-    nextBtn.addEventListener('click', ()=> { next(); });
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
 
     let resizeDebounce;
-    window.addEventListener('resize', ()=> {
+    window.addEventListener('resize', () => {
         clearTimeout(resizeDebounce);
-        resizeDebounce = setTimeout(()=> {
+        resizeDebounce = setTimeout(() => {
             const newSlidesToShow = window.innerWidth >= 900 ? 2 : 1;
             if (newSlidesToShow !== slidesToShow) {
                 slidesToShow = newSlidesToShow;
-                // ensure currentIndex is within bounds
-                if (currentIndex > pagesCount()-1) currentIndex = pagesCount()-1;
+                if (currentIndex > pagesCount() - 1) currentIndex = pagesCount() - 1;
             }
-            setWidths();
+            updateTrack(false);
         }, 120);
     });
 
-    (function init(){
-        slidesToShow = window.innerWidth >= 900 ? 2 : 1;
-        updateTrack(false);
-    })();
+    // init
+    slidesToShow = window.innerWidth >= 900 ? 2 : 1;
+    updateTrack(false);
 })();
