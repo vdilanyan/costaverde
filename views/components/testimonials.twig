@@ -1,0 +1,44 @@
+<div id="testimonials" style="--background-image: url({{ background_image }})">
+    <div class="container">
+        <div class="flex-container header">
+            <div class="content">
+                <h2 class="section-title line-height-small">{{ heading }}</h2>
+                <p class="total-score">See why we're rated <span>{{ total_score }} Stars on Google</span></p>
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-prev transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M15 8H1M1 8L8 15M1 8L8 1" stroke="#1A4224" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="carousel-next transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#1A4224" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container carousel">
+        <div class="reviews flex-container transition">
+            {% for testimonial in testimonials %}
+                <div class="testimonial-card">
+                    <div class="rating flex-container">
+                        <div class="google-badge line-height-small">Google</div>
+                        <div class="stars flex-container">
+                            {% for i in 1..testimonial.rating %}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                                    <path d="M12.989 2.91361C13.287 1.99653 14.5844 1.99653 14.8824 2.91361L16.841 8.94153C16.9742 9.35166 17.3564 9.62934 17.7877 9.62934H24.1258C25.0901 9.62934 25.491 10.8633 24.7109 11.43L19.5832 15.1555C19.2344 15.409 19.0884 15.8583 19.2216 16.2684L21.1802 22.2963C21.4782 23.2134 20.4286 23.976 19.6485 23.4092L14.5208 19.6838C14.1719 19.4303 13.6995 19.4303 13.3506 19.6838L8.22297 23.4092C7.44286 23.976 6.39322 23.2134 6.6912 22.2963L8.64979 16.2684C8.78304 15.8583 8.63706 15.409 8.28818 15.1555L3.16053 11.43C2.38041 10.8633 2.78134 9.62934 3.74561 9.62934H10.0837C10.515 9.62934 10.8972 9.35166 11.0304 8.94153L12.989 2.91361Z" fill="#FFCA0C"/>
+                                </svg>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <p class="review font-bold">
+                        "{{ testimonial.review }}"
+                    </p>
+                    <p class="author text-uppercase">– {{ testimonial.author }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

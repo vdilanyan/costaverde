@@ -1,15 +1,15 @@
 <div id="why-us">
     <div class="container flex-container">
         <div class="content-section">
-            <h2 class="font-bold section-title">{{ heading }}</h2>
+            <h2 class="font-bold section-title line-height-small">{{ heading }}</h2>
             <p>{{ description }}</p>
             <img src="{{ theme.link }}/assets/img/favicon.png" alt="Costa Verde logo">
         </div>
         <div class="cards-section">
             {% for card in cards %}
                 <div class="card">
-                    <div class="index section-title">0{{ loop.index }}</div>
-                    <h3 class="title font-bold section-title">{{ card.title }}</h3>
+                    <div class="index line-height-small">0{{ loop.index }}</div>
+                    <h3 class="title font-bold line-height-small">{{ card.title }}</h3>
                     <ul>
                         {% for item in card.points %}
                             <li>{{ item.point }}</li>

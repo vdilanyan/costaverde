@@ -19,6 +19,12 @@ $context = array_merge($context, [
         'description' => get_field('vp_description'),
         'cards' => get_field('cards'),
     ],
+    'testimonials' => [
+        'heading' => get_field('testimonials_heading'),
+        'background_image' => get_field('background_image'),
+        'total_score' => get_field('total_score'),
+        'testimonials' => get_field('testimonials'),
+    ],
 ]);
 
 Timber::render('templates/landing-page.twig', $context);

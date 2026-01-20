@@ -11,4 +11,10 @@
         'description': why_us.description,
         'cards': why_us.cards,
     } %}
+    {% include 'components/testimonials.twig' with {
+        'heading': testimonials.heading,
+        'total_score': testimonials.total_score,
+        'testimonials': testimonials.testimonials,
+        'background_image': testimonials.background_image,
+    } %}
 {% endblock %}
