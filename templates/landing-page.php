@@ -25,6 +25,28 @@ $context = array_merge($context, [
         'total_score' => get_field('total_score'),
         'testimonials' => get_field('testimonials'),
     ],
+    'how_it_works' => [
+        'heading' => get_field('hiw_heading'),
+        'steps' => get_field('hiw_steps'),
+        'footnote' => get_field('hiw_footnote'),
+        'form_title' => get_field('form_title'),
+    ],
+    'services' => [
+        'heading' => get_field('services_heading'),
+        'description' => get_field('services_description'),
+        'services_list_title' => get_field('services_list_title'),
+        'services' => get_field('services'),
+    ],
+    'cta' => [
+        'heading' => get_field('cta_heading'),
+        'description' => get_field('cta_description'),
+        'background_image' => get_field('cta_background_image'),
+        'first_cta_link' => get_field('first_cta_link'),
+        'second_cta_link' => get_field('second_cta_link'),
+    ],
+    'about_us' => [
+        'sections' => get_field('sections'),
+    ],
 ]);
 
 Timber::render('templates/landing-page.twig', $context);

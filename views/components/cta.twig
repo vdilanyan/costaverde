@@ -1,0 +1,16 @@
+<div id="cta" style="--cta-background-image: url({{ background_image }})">
+    <div class="container">
+        <div class="content">
+            <h3 class="font-bold line-height-small text-center">{{ heading }}</h3>
+            <p class="text-center">{{ description }}</p>
+            <div class="ctas flex-container">
+                <a href="{{ function('get_permalink', first_cta.ID) }}" class="btn">
+                    {{ first_cta.post_title }}
+                </a>
+                <a href="{{ function('get_permalink', second_cta.ID) }}" class="btn">
+                    {{ second_cta.post_title }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div id="services">
+    <div class="container grid-container">
+        <div class="content">
+            <h3 class="section-title line-height-small font-bold">
+                {{ heading }}
+            </h3>
+            <p>{{ description }}</p>
+        </div>
+        <div class="services">
+            <h4 class="font-bold services-list-title">{{ services_list_title }}</h4>
+            <div class="lists grid-container">
+                {% for group in services|batch(5, null) %}
+                    <ul class="list">
+                        {% for item in group if item is not null %}
+                            <li>{{ item.service }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

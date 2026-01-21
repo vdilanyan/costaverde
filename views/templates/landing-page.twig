@@ -17,4 +17,26 @@
         'testimonials': testimonials.testimonials,
         'background_image': testimonials.background_image,
     } %}
+    {% include 'components/how-it-works.twig' with {
+        'heading': how_it_works.heading,
+        'steps': how_it_works.steps,
+        'footnote': how_it_works.footnote,
+        'form_title': how_it_works.form_title,
+    } %}
+    {% include 'components/services.twig' with {
+        'heading': services.heading,
+        'description': services.description,
+        'services_list_title': services.services_list_title,
+        'services': services.services,
+    } %}
+    {% include 'components/cta.twig' with {
+        'heading': cta.heading,
+        'description': cta.description,
+        'background_image': cta.background_image,
+        'first_cta': cta.first_cta_link,
+        'second_cta': cta.second_cta_link,
+    } %}
+    {% include 'components/about-us.twig' with {
+        'sections': about_us.sections,
+    } %}
 {% endblock %}
