@@ -47,6 +47,16 @@ $context = array_merge($context, [
     'about_us' => [
         'sections' => get_field('sections'),
     ],
+    'projects' => [
+        'heading' => get_field('projects_heading'),
+        'gallery_shortcode' => get_field('gallery_shortcode'),
+    ],
+    'contact_us' => [
+        'heading' => get_field('contact_us_heading'),
+        'description' => get_field('contact_us_description'),
+        'button_label' => get_field('contact_us_consultation_button_label'),
+        'background_image' => get_field('contact_us_background_image'),
+    ],
 ]);
 
 Timber::render('templates/landing-page.twig', $context);

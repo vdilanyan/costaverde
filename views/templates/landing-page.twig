@@ -36,7 +36,17 @@
         'first_cta': cta.first_cta_link,
         'second_cta': cta.second_cta_link,
     } %}
+    {% include 'components/projects.twig' with {
+        'heading': projects.heading,
+        'gallery_shortcode': projects.gallery_shortcode,
+    } %}
     {% include 'components/about-us.twig' with {
         'sections': about_us.sections,
+    } %}
+    {% include 'components/contact-us.twig' with {
+        'heading': contact_us.heading,
+        'description': contact_us.description,
+        'button_label': contact_us.button_label,
+        'background_image': contact_us.background_image,
     } %}
 {% endblock %}
