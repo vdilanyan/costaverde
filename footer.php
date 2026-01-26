@@ -3,12 +3,16 @@
 
         global $post;
 
-        $args = [
-            'parent' => $post->ID,
-            'post_type' => 'page',
-            'post_status' => 'publish',
-            'posts_per_page' => -1,
-        ];
+        $args = [];
+
+        if (!is_null($post)) {
+            $args = [
+                'parent' => $post->ID,
+                'post_type' => 'page',
+                'post_status' => 'publish',
+                'posts_per_page' => -1,
+            ];
+        }
 
         $child_pages = get_pages($args);
 

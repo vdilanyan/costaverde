@@ -4,9 +4,9 @@ add_image_size('blog-thumb', 200, 200, true);
 
 function add_open_graph_meta_tags(): void
 {
-    if (!is_404()) {
-        global $post;
+    global $post;
 
+    if (!is_null($post)) {
         $custom_image_url = get_stylesheet_directory_uri() . '/assets/img/logo.jpg';
         $publish_date = get_the_date(DATE_W3C, $post->ID); ?>
 
