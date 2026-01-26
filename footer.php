@@ -25,6 +25,5 @@
         Timber::render('layout/footer.twig', $context);
 
         wp_footer(); ?>
-        this is the footer
     </body>
 </html>
