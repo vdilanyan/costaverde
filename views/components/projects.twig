@@ -2,7 +2,25 @@
     <div class="container">
         <h2 class="section-title line-height-small font-bold">{{ heading }}</h2>
         <div class="gallery">
-            {{ function('do_shortcode', gallery_shortcode) }}
+            <div class="grid">
+                {% for image in gallery %}
+                    <img src="{{ image }}" alt="">
+                {% endfor %}
+            </div>
+            <div class="lightbox-overlay" id="lightboxOverlay" style="display: none;">
+                <span class="lightbox-close" id="lightboxClose">
+                    <img src="{{ theme.link }}/assets/img/close.svg" alt="close">
+                </span>
+                <div class="lightbox-image">
+                    <img id="lightboxImage" alt="Gallery large view">
+                </div>
+                <button class="lightbox-prev" id="lightboxPrev">
+                    <img src="{{ theme.link }}/assets/img/chevron-left.svg" alt="chevron-left">
+                </button>
+                <button class="lightbox-next" id="lightboxNext">
+                    <img src="{{ theme.link }}/assets/img/chevron-right.svg" alt="chevron-right">
+                </button>
+            </div>
         </div>
     </div>
 </div>
