@@ -393,6 +393,11 @@ button {
   gap: 16px;
   justify-content: center;
 }
+@media (max-width: 767px) {
+  #hero .images-wrapper .images {
+    gap: 8px;
+  }
+}
 #hero .images-wrapper .images img {
   width: var(--image-size);
   aspect-ratio: 1 / 1;
@@ -613,8 +618,11 @@ button {
 #testimonials .header {
   justify-content: space-between;
 }
-#testimonials .header .content {
-  text-align: center;
+@media (max-width: 767px) {
+  #testimonials .header .content {
+    text-align: center;
+    margin: 0 auto;
+  }
 }
 @media (max-width: 767px) {
   #testimonials .header .carousel-nav {
