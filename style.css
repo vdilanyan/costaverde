@@ -640,6 +640,8 @@ button {
   }
 }
 #testimonials .carousel .reviews {
+  touch-action: pan-y;
+  user-select: none;
   gap: 24px;
 }
 @media (max-width: 767px) {
@@ -798,6 +800,8 @@ button {
   display: grid;
   grid-template-columns: repeat(2, 355px);
   gap: 16px;
+  touch-action: pan-y;
+  user-select: none;
 }
 @media (max-width: 1199px) {
   #why-us .cards-section {

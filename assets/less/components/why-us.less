@@ -64,6 +64,8 @@
     display: grid;
     grid-template-columns: repeat(2, 355px);
     gap: 16px;
+    touch-action: pan-y;
+    user-select: none;
 
     @media (max-width: 1199px) {
       grid-template-columns: repeat(2, 1fr);

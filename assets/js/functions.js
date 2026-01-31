@@ -26,6 +26,10 @@ function createCarousel({
 
     enableMinWidth = null,
     enableMaxWidth = null,
+
+    // drag options
+    draggable = true,
+    swipeThresholdPx = 50,
 }) {
     if (!track) return null;
 
@@ -43,12 +47,20 @@ function createCarousel({
     let resizeDebounce = null;
 
     // store handlers so we can remove them
-    const btnHandlers = new Map(); // Element -> { type, handler }
+    const btnHandlers = new Map(); // Element -> { handler }
 
     // dots state (per container)
     let dotButtonsByContainer = new Map(); // container -> [buttons]
     let dotClickHandlersByContainer = new Map(); // container -> [{btn, handler}]
 
+    // drag/swipe state
+    let dragAttached = false;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let startTranslateX = 0;
+
+    // --- helpers ---
     function isEnabledForWidth(w) {
         if (enableMinWidth != null) return w >= enableMinWidth;
         if (enableMaxWidth != null) return w <= enableMaxWidth;
@@ -59,20 +71,26 @@ function createCarousel({
         return Math.ceil(items.length / slidesToShow);
     }
 
-    function updateTrack(animate = true) {
-        const pageStartItemIndex = currentIndex * slidesToShow;
+    function pageOffsetPx(pageIndex) {
+        const pageStartItemIndex = pageIndex * slidesToShow;
         const pageStartItem = items[pageStartItemIndex];
-        if (!pageStartItem) return;
-
+        if (!pageStartItem) return 0;
         const offset = pageStartItem.offsetLeft - items[0].offsetLeft;
+        return -offset;
+    }
 
+    function setTranslateX(px, animate) {
         track.style.transition = animate ? "" : "none";
-        track.style.transform = `translateX(${-offset}px)`;
-
+        track.style.transform = `translateX(${px}px)`;
         if (!animate) {
-            void track.offsetWidth;
+            void track.offsetWidth; // force reflow
             track.style.transition = "";
         }
+    }
+
+    function updateTrack(animate = true) {
+        // always snap to the current page start
+        setTranslateX(pageOffsetPx(currentIndex), animate);
     }
 
     function setNavVisible(visible) {
@@ -87,6 +105,7 @@ function createCarousel({
         }
     }
 
+    // --- dots ---
     function updateDotsActive() {
         dotsContainers.forEach((container) => {
             const dotButtons = dotButtonsByContainer.get(container) || [];
@@ -151,10 +170,11 @@ function createCarousel({
         updateDotsActive();
     }
 
+    // --- navigation ---
     function goTo(pageIndex) {
         const pages = pagesCount();
         currentIndex = Math.max(0, Math.min(pageIndex, pages - 1));
-        updateTrack();
+        updateTrack(true);
         updateDotsActive();
     }
 
@@ -202,6 +222,102 @@ function createCarousel({
         });
     }
 
+    // --- dragging (mobile swipe) ---
+    function attachDragging() {
+        if (!draggable || dragAttached) return;
+
+        dragAttached = true;
+
+        const onPointerDown = (e) => {
+            if (!enabled) return;
+            // Only primary button for mouse
+            if (e.pointerType === "mouse" && e.button !== 0) return;
+
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            startTranslateX = pageOffsetPx(currentIndex);
+
+            // disable transition while dragging
+            track.style.transition = "none";
+
+            // capture pointer so we keep receiving events even if leaving track
+            try {
+                track.setPointerCapture(e.pointerId);
+            } catch (_) {}
+        };
+
+        const onPointerMove = (e) => {
+            if (!enabled || !isDragging) return;
+
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+
+            // If user is scrolling vertically, abort drag and snap back
+            if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 6) {
+                isDragging = false;
+                updateTrack(true);
+                return;
+            }
+
+            // prevent page from scrolling horizontally when swiping
+            if (Math.abs(dx) > 6) e.preventDefault();
+
+            // bounds + resistance
+            const minX = pageOffsetPx(pagesCount() - 1);
+            const maxX = pageOffsetPx(0);
+
+            let nextX = startTranslateX + dx;
+            if (nextX > maxX) nextX = maxX + (nextX - maxX) * 0.25;
+            if (nextX < minX) nextX = minX + (nextX - minX) * 0.25;
+
+            track.style.transform = `translateX(${nextX}px)`;
+        };
+
+        const onPointerUp = (e) => {
+            if (!enabled || !isDragging) return;
+            isDragging = false;
+
+            const dx = e.clientX - startX;
+
+            // restore transition (updateTrack/goTo will re-enable it)
+            track.style.transition = "";
+
+            if (dx < -swipeThresholdPx) next();
+            else if (dx > swipeThresholdPx) prev();
+            else updateTrack(true);
+
+            try {
+                track.releasePointerCapture(e.pointerId);
+            } catch (_) {}
+        };
+
+        // passive false on move so preventDefault works for horizontal swipe
+        track.addEventListener("pointerdown", onPointerDown, { passive: true });
+        track.addEventListener("pointermove", onPointerMove, { passive: false });
+        track.addEventListener("pointerup", onPointerUp, { passive: true });
+        track.addEventListener("pointercancel", onPointerUp, { passive: true });
+
+        // save for cleanup
+        track.__carouselDragHandlers = { onPointerDown, onPointerMove, onPointerUp };
+    }
+
+    function detachDragging() {
+        if (!dragAttached) return;
+        dragAttached = false;
+
+        const h = track.__carouselDragHandlers;
+        if (!h) return;
+
+        track.removeEventListener("pointerdown", h.onPointerDown);
+        track.removeEventListener("pointermove", h.onPointerMove);
+        track.removeEventListener("pointerup", h.onPointerUp);
+        track.removeEventListener("pointercancel", h.onPointerUp);
+
+        track.__carouselDragHandlers = null;
+    }
+
+    // --- lifecycle ---
     function attach() {
         if (enabled) return;
         enabled = true;
@@ -214,12 +330,14 @@ function createCarousel({
             setNavVisible(false);
             destroyDots();
             updateTrack(false);
+            // still ok to not attach dragging
             return;
         }
 
-        setNavVisible(true);     // CSS will decide header vs footer visibility
+        setNavVisible(true); // CSS will decide header vs footer visibility
         attachButtons();
         buildDots();
+        attachDragging();
         updateTrack(false);
     }
 
@@ -228,6 +346,7 @@ function createCarousel({
         enabled = false;
 
         detachButtons();
+        detachDragging();
 
         track.style.transition = "none";
         track.style.transform = "";
@@ -275,7 +394,7 @@ function createCarousel({
 }
 
 ready(() => {
-    // Testimonials (always enabled, 1 on mobile, 2 on >=900)
+    // Testimonials (always enabled, 1 on mobile, 2 on >=breakpoint)
     createCarousel({
         track: document.querySelector("#testimonials .carousel .reviews"),
         prevBtn: document.querySelectorAll("#testimonials .carousel-prev"),
@@ -284,8 +403,10 @@ ready(() => {
         dotsContainer: document.querySelector("#testimonials .footer .carousel-dots"),
         slidesSm: 1,
         slidesLg: 2,
+        draggable: true,
     });
 
+    // Why-us (enabled only up to 772px)
     createCarousel({
         track: document.querySelector("#why-us .cards-section"),
         prevBtn: document.querySelector("#why-us .carousel-prev"),
@@ -295,5 +416,6 @@ ready(() => {
         slidesSm: 1,
         slidesLg: 2,
         enableMaxWidth: 772,
+        draggable: true,
     });
 });
