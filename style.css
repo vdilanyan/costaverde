@@ -635,7 +635,7 @@ button {
 }
 @media (max-width: 767px) {
   #testimonials .carousel {
-    margin-right: -26px;
+    margin-right: -24px;
     margin-top: 24px;
   }
 }
@@ -662,10 +662,10 @@ button {
 }
 @media (max-width: 767px) {
   #testimonials .carousel .reviews .testimonial-card {
-    width: calc(100% - 40px - 26px);
+    width: calc(100% - 40px - 24px);
   }
   #testimonials .carousel .reviews .testimonial-card:last-child {
-    width: calc(100% - 26px);
+    width: calc(100% - 24px);
   }
 }
 #testimonials .carousel .reviews .testimonial-card .rating {
@@ -793,7 +793,7 @@ button {
 @media (max-width: 767px) {
   #why-us .wrapper {
     overflow: hidden;
-    margin-right: -26px;
+    margin-right: -24px;
   }
 }
 #why-us .cards-section {
@@ -826,10 +826,10 @@ button {
 @media (max-width: 767px) {
   #why-us .cards-section .card {
     flex: 0 0 auto;
-    width: calc(100% - 40px - 26px);
+    width: calc(100% - 40px - 24px);
   }
   #why-us .cards-section .card:last-child {
-    width: calc(100% - 26px);
+    width: calc(100% - 24px);
   }
 }
 #why-us .cards-section .card .title {
