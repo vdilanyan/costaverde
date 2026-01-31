@@ -1,3 +1,19 @@
+:root {
+  --image-size: 416px;
+
+  @media (max-width: 1199px) {
+    --image-size: 378px;
+  }
+
+  @media (max-width: 991px) {
+    --image-size: 278px;
+  }
+
+  @media (max-width: 767px) {
+    --image-size: 178px;
+  }
+}
+
 #hero {
   padding-top: 32px;
 
@@ -9,26 +25,48 @@
     max-width: 805px;
     margin: 0 auto;
     text-align: center;
+
+    @media (max-width: 767px) {
+      gap: 12px;
+    }
   }
 
   h1 {
     font-size: 48px;
+
+    @media (max-width: 767px) {
+      font-size: 36px;
+      line-height: 1.1;
+    }
   }
 
   p {
     font-size: 21px;
+
+    @media (max-width: 767px) {
+      font-size: 18px;
+    }
   }
 
   a.btn {
     margin-top: 16px;
+
+    @media (max-width: 767px) {
+      margin-top: 12px;
+    }
   }
 
   .images-wrapper {
     padding-top: 74px;
+    overflow: hidden;
 
     @media (max-width: 1327px) {
       padding-left: 0;
       padding-right: 0;
+    }
+
+    @media (max-width: 767px) {
+      padding-top: 32px;
     }
 
     .images {
@@ -36,8 +74,8 @@
       justify-content: center;
 
       img {
-        width: 416px;
-        height: 416px;
+        width: var(--image-size);
+        aspect-ratio: 1 / 1;
         object-fit: cover;
         object-position: center;
       }

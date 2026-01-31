@@ -1,19 +1,62 @@
 #why-us {
   padding: 80px 0;
 
+  @media (max-width: 767px) {
+    padding: 32px 0;
+  }
+
   & > div.flex-container {
     gap: 64px;
+
+    @media (max-width: 1199px) {
+      flex-direction: column;
+      gap: 24px;
+    }
   }
 
   .content-section {
-    width: 490px;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @media (min-width: 1200px) {
+      width: 490px;
+      flex-direction: column;
+    }
+
+    .title-section {
+      max-width: 805px;
+
+      @media (min-width: 768px) and (max-width: 1199px) {
+        padding-right: 16px;
+      }
+
+      p {
+        margin-top: 16px;
+
+        @media (max-width: 767px) {
+          margin-top: 12px;
+        }
+      }
+    }
 
     img {
       width: 140px;
-      margin-top: auto;
+
+      @media (max-width: 767px) {
+        display: none;
+      }
+
+      @media (min-width: 1200px) {
+        margin-top: auto;
+      }
+    }
+  }
+
+  .wrapper {
+    @media (max-width: 767px) {
+      overflow: hidden;
+      margin-right: -26px;
     }
   }
 
@@ -21,6 +64,15 @@
     display: grid;
     grid-template-columns: repeat(2, 355px);
     gap: 16px;
+
+    @media (max-width: 1199px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 767px) {
+      display: flex;
+      gap: 8px;
+    }
 
     .card {
       display: flex;
@@ -30,6 +82,15 @@
       background: #FFF;
       border: 1px solid #D9D9D9;
       border-radius: 12px;
+
+      @media (max-width: 767px) {
+        flex: 0 0 auto;
+        width: calc(100% - 40px - 26px);
+
+        &:last-child {
+          width: calc(100% - 26px);
+        }
+      }
 
       .title {
         font-size: 28px;
@@ -44,6 +105,45 @@
           font-size: 16px;
         }
       }
+    }
+  }
+
+  .carousel-nav {
+    @media (min-width: 768px) {
+      display: none;
+    }
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .carousel-dots {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+
+      button {
+        width: 8px;
+        height: 8px;
+        border: none;
+        border-radius: 100%;
+        background: rgba(26, 66, 36, 0.20);
+        transition: .25s;
+
+        &.is-active {
+          background: #1A4224;
+        }
+      }
+    }
+
+    button {
+      width: 48px;
+      height: 48px;
+      border: 1px solid #1a4824;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

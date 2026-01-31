@@ -3,6 +3,10 @@
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%),
               var(--cta-background-image) no-repeat center/cover;
 
+  @media (max-width: 767px) {
+    padding: 48px 0;
+  }
+
   .content {
     color: #fff;
     margin: 0 auto;
@@ -10,16 +14,31 @@
 
     h3 {
       font-size: 32px;
+
+      @media (max-width: 767px) {
+        font-size: 28px;
+        line-height: 1.1;
+      }
     }
 
     p {
       margin: 16px 0 32px;
+
+      @media (max-width: 767px) {
+        margin: 12px 0 32px;
+      }
     }
 
     .ctas {
       margin: 0 auto;
       justify-content: center;
       gap: 32px;
+
+      @media (max-width: 767px) {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+      }
     }
   }
 }

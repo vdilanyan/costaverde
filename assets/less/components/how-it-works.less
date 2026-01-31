@@ -2,22 +2,50 @@
   background: #DFE8C9;
   padding: 64px 0;
 
+  @media (max-width: 767px) {
+    padding: 32px 0;
+
+    .content .section-title {
+      text-align: center;
+    }
+  }
+
   .grid-container {
-    grid-template-columns: 1fr 560px;
-    column-gap: 64px;
+    gap: 64px;
+
+    @media (max-width: 767px) {
+      gap: 24px;
+    }
+
+    @media (min-width: 992px) {
+      grid-template-columns: 1fr 560px;
+    }
 
     .steps {
       flex-direction: column;
       gap: 24px;
       margin: 40px 0;
 
+      @media (max-width: 767px) {
+        gap: 16px;
+        margin: 24px 0;
+      }
+
       .step {
         gap: 24px;
+
+        @media (max-width: 767px) {
+          gap: 16px;
+        }
 
         .copy {
           flex: 1;
           font-size: 21px;
           font-weight: 400;
+
+          @media (max-width: 767px) {
+            font-size: 18px;
+          }
         }
       }
     }
@@ -25,10 +53,18 @@
     .footnote {
       color: #000;
 
+      @media (max-width: 767px) {
+        text-align: center;
+      }
+
       svg {
         position: absolute;
         top: -18px;
         right: 0;
+
+        @media (max-width: 1199px) {
+          display: none;
+        }
       }
     }
 
@@ -38,16 +74,31 @@
       border-radius: 16px;
       padding: 40px 48px;
 
+      @media (max-width: 767px) {
+        padding: 24px;
+      }
+
       .form-title {
         font-size: 32px;
         line-height: 44px;
         letter-spacing: -0.64px;
         text-align: center;
         margin-bottom: 24px;
+
+        @media (max-width: 767px) {
+          font-size: 28px;
+          margin-bottom: 16px;
+        }
       }
 
       .frm_form_fields .frm_fields_container {
         grid-gap: 0 16px;
+
+        @media (max-width: 767px) {
+          .frm_form_field:not(.submit-btn) {
+            margin-bottom: 16px;
+          }
+        }
       }
 
       .with_frm_style .frm_top_container .frm_primary_label {

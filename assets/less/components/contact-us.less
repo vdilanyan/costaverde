@@ -3,6 +3,10 @@
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%),
               var(--contact-us-background-image) no-repeat center/cover;
 
+  @media (max-width: 767px) {
+    padding: 48px 0;
+  }
+
   .content {
     color: #fff;
     margin: 0 auto;
@@ -11,10 +15,20 @@
 
   h2 {
     font-size: 44px;
+
+    @media (max-width: 767px) {
+      font-size: 32px;
+      line-height: 1.1;
+    }
   }
 
   p {
     margin: 16px 0 32px;
+
+    @media (max-width: 767px) {
+      font-size: 18px;
+      margin: 12px 0 32px;
+    }
   }
 
   a {

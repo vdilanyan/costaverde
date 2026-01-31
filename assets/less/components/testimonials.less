@@ -4,8 +4,16 @@
               var(--background-image) no-repeat center/cover;
   color: white;
 
+  @media (max-width: 767px) {
+    padding: 32px 0;
+  }
+
   .total-score {
     margin-top: 16px;
+
+    @media (max-width: 767px) {
+      margin-top: 12px;
+    }
 
     span {
       color: #FFCA0C;
@@ -16,24 +24,13 @@
   .header {
     justify-content: space-between;
 
+    .content {
+      text-align: center;
+    }
+
     .carousel-nav {
-      display: flex;
-      gap: 16px;
-      margin-top: auto;
-
-      button {
-        display: flex;
-        width: 56px;
-        height: 56px;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #8DC544;
-        background: #8DC544;
-        border-radius: 100%;
-
-        &:hover {
-          background: #B8EA77;
-        }
+      @media (max-width: 767px) {
+        display: none;
       }
     }
   }
@@ -42,19 +39,36 @@
     margin-top: 48px;
     overflow: hidden;
 
+    @media (max-width: 767px) {
+      margin-right: -26px;
+      margin-top: 24px;
+    }
+
     .reviews {
       gap: 24px;
+
+      @media (max-width: 767px) {
+        gap: 8px;
+      }
 
       .testimonial-card {
         color: #222;
         display: flex;
         flex-direction: column;
-        width: 628px;
+        width: calc(50% - 12px);
         flex: 0 0 auto;
         padding: 32px;
         background: #FFF;
         border: 1px solid #D9D9D9;
         border-radius: 12px;
+
+        @media (max-width: 767px) {
+          width: calc(100% - 40px - 26px);
+
+          &:last-child {
+            width: calc(100% - 26px);
+          }
+        }
 
         .rating {
           gap: 16px;
@@ -80,6 +94,56 @@
           font-size: 16px;
           margin-top: auto;
         }
+      }
+    }
+  }
+
+  .footer .carousel-nav {
+    margin-top: 24px;
+    align-items: center;
+    justify-content: space-between;
+
+    .carousel-dots {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+
+      button {
+        width: 8px;
+        height: 8px;
+        border: none;
+        border-radius: 100%;
+        background: #DFE8C9;
+        transition: .25s;
+
+        &.is-active {
+          background: #8DC544;
+        }
+      }
+    }
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .carousel-nav {
+    display: flex;
+    gap: 16px;
+    margin-top: auto;
+
+    button {
+      display: flex;
+      width: 56px;
+      height: 56px;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #8DC544;
+      background: #8DC544;
+      border-radius: 100%;
+
+      &:hover {
+        background: #B8EA77;
       }
     }
   }

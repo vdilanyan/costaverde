@@ -49,7 +49,7 @@ $context = array_merge($context, [
     ],
     'projects' => [
         'heading' => get_field('projects_heading'),
-        'gallery' => get_field('gallery'),
+        'gallery_shortcode' => get_field('gallery_shortcode'),
     ],
     'contact_us' => [
         'heading' => get_field('contact_us_heading'),

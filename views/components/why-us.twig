@@ -1,22 +1,39 @@
 <div id="why-us">
     <div class="container flex-container">
         <div class="content-section">
-            <h2 class="font-bold section-title line-height-small">{{ heading }}</h2>
-            <p>{{ description }}</p>
+            <div class="title-section">
+                <h2 class="font-bold section-title line-height-small">{{ heading }}</h2>
+                <p>{{ description }}</p>
+            </div>
             <img src="{{ theme.link }}/assets/img/favicon.png" alt="Costa Verde logo">
         </div>
-        <div class="cards-section">
-            {% for card in cards %}
-                <div class="card">
-                    <div class="index line-height-small">0{{ loop.index }}</div>
-                    <h3 class="title font-bold line-height-small">{{ card.title }}</h3>
-                    <ul>
-                        {% for item in card.points %}
-                            <li>{{ item.point }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endfor %}
+        <div class="wrapper">
+            <div class="cards-section transition">
+                {% for card in cards %}
+                    <div class="card">
+                        <div class="index line-height-small">0{{ loop.index }}</div>
+                        <h3 class="title font-bold line-height-small">{{ card.title }}</h3>
+                        <ul>
+                            {% for item in card.points %}
+                                <li>{{ item.point }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="carousel-nav">
+            <button class="carousel-prev transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15.8332 10.0001H4.1665M4.1665 10.0001L9.99984 15.8334M4.1665 10.0001L9.99984 4.16675" stroke="#1A4224" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="carousel-dots"></div>
+            <button class="carousel-next transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4.1665 10.0001H15.8332M15.8332 10.0001L9.99984 4.16675M15.8332 10.0001L9.99984 15.8334" stroke="#1A4224" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
         </div>
     </div>
 </div>

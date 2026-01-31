@@ -1,8 +1,21 @@
 header {
   padding: 24px 0;
 
+  @media (max-width: 767px) {
+    padding: 16px 0;
+
+    .container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+
   #logo img {
     height: 40px;
+
+    @media (max-width: 767px) {
+      height: 20px;
+    }
   }
 
   .flex-container {
@@ -22,6 +35,20 @@ header {
 
     &:hover {
       background: #222;
+    }
+
+    @media (max-width: 767px) {
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      gap: 8px;
+      padding: 12px 16px;
+      width: unset;
+      min-width: unset;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 }
