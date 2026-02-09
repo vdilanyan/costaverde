@@ -24,6 +24,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
 }
+body.page-template-thank-you main,
 body.error404 main {
   flex: 1;
   display: flex;
@@ -1006,6 +1007,7 @@ header .phone-call:hover {
 }
 .page-404 a {
   display: inline-flex;
+  gap: 8px;
   align-items: center;
   margin: 0 auto;
   color: inherit;
@@ -1013,4 +1015,16 @@ header .phone-call:hover {
 }
 .page-404 a img {
   margin-right: 12px;
+}
+.page-thank-you {
+  flex-direction: column;
+  gap: 16px;
+}
+.page-thank-you a {
+  color: #1A4224;
+  transition: 0.25s;
+  font-weight: 700;
+}
+.page-thank-you a:hover {
+  color: #8DC544;
 }
