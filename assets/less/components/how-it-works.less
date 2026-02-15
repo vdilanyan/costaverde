@@ -91,30 +91,86 @@
         }
       }
 
-      .frm_form_fields .frm_fields_container {
-        grid-gap: 0 16px;
+      form {
+        display: grid;
+        gap: 24px 16px;
+        grid-template-areas: "first-name last-name"
+                             "email tel"
+                             "textarea textarea"
+                             "submit submit";
 
-        @media (max-width: 767px) {
-          .frm_form_field:not(.submit-btn) {
-            margin-bottom: 16px;
+        p:nth-of-type(1) {
+          grid-area: first-name;
+        }
+
+        p:nth-of-type(2) {
+          grid-area: last-name;
+        }
+
+        p:nth-of-type(3) {
+          grid-area: email;
+        }
+
+        p:nth-of-type(4) {
+          grid-area: tel;
+        }
+
+        p:nth-of-type(5) {
+          grid-area: textarea;
+        }
+
+        p:nth-of-type(6) {
+          grid-area: submit;
+        }
+
+        input[type="tel"],
+        input[type="text"],
+        input[type="email"],
+        textarea {
+          color: #222222;
+          background-color: #ffffff;
+          border-color: #D0D5DD;
+          border-width: 1px;
+          border-style: solid;
+          border-radius: 8px;
+          width: 100% !important;
+          max-width: 100%;
+          max-height: 250px;
+          font-size: 16px;
+          font-family: inherit;
+          padding: 10px 14px 10px 14px;
+          box-sizing: border-box;
+          outline: none;
+          font-weight: 500;
+        }
+
+        label {
+          max-width: 100%;
+          font-size: 14px;
+          color: #222222;
+          font-weight: 500;
+          text-align: left;
+          padding: 0;
+          margin: 0;
+
+          span {
+            display: block;
+            margin-top: 6px;
           }
         }
-      }
 
-      .with_frm_style .frm_top_container .frm_primary_label {
-        padding-bottom: 6px;
-      }
+        input[type="submit"] {
+          margin: 8px auto 0;
+        }
 
-      fieldset {
-        padding: 0;
-      }
+        input[type="submit"] + span,
+        .wpcf7-response-output {
+          display: none;
+        }
 
-      .submit-btn {
-        text-align: center;
-        margin: 8px 0 0;
-
-        button {
-          margin: 0 auto;
+        .wpcf7-not-valid-tip {
+          font-size: 12px;
+          margin: 0;
         }
       }
     }
