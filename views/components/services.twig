@@ -8,7 +8,8 @@
         </div>
         <div class="services">
             <h4 class="font-bold services-list-title">{{ services_list_title }}</h4>
-            <div class="lists grid-container">
+            {% set cols = (services|batch(5, null))|length %}
+            <div class="lists grid-container" style="--services-cols: {{ cols }};">
                 {% for group in services|batch(5, null) %}
                     <ul class="list">
                         {% for item in group if item is not null %}

@@ -30,6 +30,15 @@ body.error404 main {
   display: flex;
   align-items: center;
 }
+body.page-template-default main {
+  padding-top: 32px;
+}
+body.page-template-default main .content {
+  max-width: 805px;
+}
+body.page-template-default main h1 {
+  margin-bottom: 28px;
+}
 a {
   text-decoration: none;
 }
@@ -167,7 +176,7 @@ input[type="submit"]:hover,
 #about-us section {
   padding: 80px 0;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   #about-us section {
     padding: 32px 0;
   }
@@ -201,6 +210,14 @@ input[type="submit"]:hover,
   }
   #about-us section .image-wrapper img {
     width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  #about-us section .image-wrapper img {
+    width: 680px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
   }
 }
 #about-us section .grid-container {
@@ -512,6 +529,11 @@ input[type="submit"]:hover,
   gap: 24px 16px;
   grid-template-areas: "first-name last-name" "email tel" "textarea textarea" "submit submit";
 }
+@media (max-width: 767px) {
+  #how-it-works .grid-container .form form {
+    grid-template-areas: "first-name" "last-name" "email" "tel" "textarea" "submit";
+  }
+}
 #how-it-works .grid-container .form form p:nth-of-type(1) {
   grid-area: first-name;
 }
@@ -528,7 +550,15 @@ input[type="submit"]:hover,
   grid-area: textarea;
 }
 #how-it-works .grid-container .form form p:nth-of-type(6) {
+  margin-top: 8px;
   grid-area: submit;
+  position: relative;
+}
+#how-it-works .grid-container .form form p:nth-of-type(6) input[type="submit"] + span {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 #how-it-works .grid-container .form form input[type="tel"],
 #how-it-works .grid-container .form form input[type="text"],
@@ -564,9 +594,8 @@ input[type="submit"]:hover,
   margin-top: 6px;
 }
 #how-it-works .grid-container .form form input[type="submit"] {
-  margin: 8px auto 0;
+  margin: 0 auto;
 }
-#how-it-works .grid-container .form form input[type="submit"] + span,
 #how-it-works .grid-container .form form .wpcf7-response-output {
   display: none;
 }
@@ -636,7 +665,7 @@ input[type="submit"]:hover,
 }
 @media (min-width: 1200px) {
   #services .services .lists {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(var(--services-cols), 1fr);
   }
 }
 #services .services .list {
